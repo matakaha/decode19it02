@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>サービスSDKを利用した IoT Hub へのデバイス登録＆一覧取得</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body class="body">
+        <p>デバイスID <input type="text" name = "deviceid" id ="deviceid"> </p>
+        <button id="regdevice">デバイス登録</button>
+        <select id="listtype" name="listtype">
+            <option value="0" selected>全部</option>
+            <option value="1">接続中</option>
+            <option value="2">未接続</option>
+        </select>
+        <button id="devicelist">検索</button>
+        <div class="listresult"></div>
+        <script type="text/javascript">
+            $(function(){
+                $('#regdevice').on('click',function(){
+                    $.ajax({
+                        url:'https://～～.azurewebsites.net/api/decode19it02sdkregist',
+                        type:'GET',
+                        data:{
+                            'name':$('#deviceid').val()
+                        }
+                    })
+                    .done( (data) => {
+                        $('.regresult').html(data);
+                        console.log(data);
+                    })
+                    .fail( (data) => {
+                        $('.regresult').html(data);
+                        console.log(data);
+                    })
+                    .always( (data) => {
+    
+                    });
+                });
+                $('#devicelist').on('click',function(){
+                    console.log($('#listtype').val());
+                    $.ajax({
+                        url:'https://～～.azurewebsites.net/api/decode19it02sdklist',
+                        type:'GET',
+                        data:{
+                            'listtype':$('#listtype').val()
+                        }
+                    })
+                    .done( (data) => {
+                        $('.listresult').html(data);
+                        console.log(data);
+                    })
+                    .fail( (data) => {
+                        $('.listresult').html(data);
+                        console.log(data);
+                    })
+                    .always( (data) => {
+    
+                    });
+                });
+            });
+    
+        </script>
+    </body>
+</html>
